@@ -15,4 +15,8 @@ class Position extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }
