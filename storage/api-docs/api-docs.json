@@ -67,6 +67,168 @@
                         "description": "Ресурс не найден"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Создать сотрудника",
+                "description": "Создать нового сотрудника",
+                "operationId": "storeEmployee",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    },
+                                    "patronymic": {
+                                        "type": "string",
+                                        "example": "Smith"
+                                    },
+                                    "position_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "address_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "passport_data": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    },
+                                    "photo_path": {
+                                        "type": "string",
+                                        "example": "path/to/photo.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Сотрудник создан успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Сотрудник успешно создан"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/EmployeeResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Неверные данные",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ошибка валидации"
+                                        },
+                                        "errors": {
+                                            "$ref": "#/components/schemas/ValidationError"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ValidationError": {
+                "title": "Validation Error",
+                "description": "Схема ошибок валидации",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Ошибка валидации"
+                    },
+                    "errors": {
+                        "properties": {
+                            "field_name": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "example": "Ошибка валидации для поля"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "EmployeeResource": {
+                "title": "Employee Resource",
+                "description": "Схема данных для сотрудника",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "patronymic": {
+                        "type": "string",
+                        "example": "Smith"
+                    },
+                    "position_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "address_id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "passport_data": {
+                        "type": "string",
+                        "example": "123456789"
+                    },
+                    "photo_path": {
+                        "type": "string",
+                        "example": "path/to/photo.jpg"
+                    }
+                },
+                "type": "object"
             }
         }
     }

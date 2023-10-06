@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Employee\StoreRequest;
 use App\Http\Resources\Employee\EmployeeResource;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -68,6 +69,32 @@ class EmployeeController extends Controller
     }
 
     /**
+     * @OA\Schema(
+     *     schema="ValidationError",
+     *     title="Validation Error",
+     *     description="Схема ошибок валидации",
+     *     @OA\Property(property="message", type="string", example="Ошибка валидации"),
+     *     @OA\Property(property="errors", type="object",
+     *         @OA\Property(property="field_name", type="array",
+     *             @OA\Items(type="string", example="Ошибка валидации для поля")
+     *         )
+     *     )
+     * )
+     * 
+     * @OA\Schema(
+     *     schema="EmployeeResource",
+     *     title="Employee Resource",
+     *     description="Схема данных для сотрудника",
+     *     @OA\Property(property="id", type="integer", example=1),
+     *     @OA\Property(property="name", type="string", example="John"),
+     *     @OA\Property(property="last_name", type="string", example="Doe"),
+     *     @OA\Property(property="patronymic", type="string", example="Smith"),
+     *     @OA\Property(property="position_id", type="integer", example=1),
+     *     @OA\Property(property="address_id", type="integer", example=2),
+     *     @OA\Property(property="passport_data", type="string", example="123456789"),
+     *     @OA\Property(property="photo_path", type="string", example="path/to/photo.jpg")
+     * )
+     * 
      * @OA\Post(
      *      path="/api/employees",
      *      operationId="storeEmployee",
@@ -115,7 +142,7 @@ class EmployeeController extends Controller
      * )
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $data = $request->validated();
         $employee = Employee::create($data);
