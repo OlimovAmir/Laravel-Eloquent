@@ -1,0 +1,73 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Doc API",
+        "description": "Описание API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Список сотрудников",
+                "description": "Получить список всех сотрудников",
+                "operationId": "getEmployees",
+                "responses": {
+                    "200": {
+                        "description": "Список сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "patronymic": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "position_id": {
+                                                "type": "integer",
+                                                "example": 10
+                                            },
+                                            "address_id": {
+                                                "type": "integer",
+                                                "example": 10
+                                            },
+                                            "passport_data": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "photo_path": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Ресурс не найден"
+                    }
+                }
+            }
+        }
+    }
+}
